@@ -1,0 +1,9 @@
+
+{
+  "settings": "Configuración",
+  "configurations": "Configuración",
+  "default_currency": "Moneda Predeterminada",
+  "update_profile": "Actualizar Perfil",
+  "update_profile_error": "Error al actualizar perfil.",
+  "profile_updated_success": "¡Perfil actualizado con éxito!"
+}
