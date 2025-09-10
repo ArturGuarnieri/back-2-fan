@@ -1,124 +1,123 @@
+# Back2Fan API - Sistema de Cashback com NFTs
 
-# Back2Fan API - Cashback System with NFTs
+Uma API completa para sistema de cashback que integra redes de afiliados (AWIN, Rakuten) com NFTs na blockchain da Chiliz (Spicy Testnet), incluindo integração com Fan Tokens.
 
-A complete API for cashback system that integrates affiliate networks (AWIN, Rakuten) with NFTs on Chiliz blockchain (Spicy Testnet), including Fan Tokens integration.
+## 🚀 Funcionalidades
 
-## 🚀 Features
+- **Geração de Links de Rastreamento**: Converte URLs normais em links de afiliado rastreáveis
+- **Webhooks de Afiliados**: Processa automaticamente postbacks da AWIN e Rakuten
+- **Cashback em NFTs**: Faz o mint automático de NFTs quando o cashback é confirmado
+- **Integração com Fan Tokens**: Suporte a Fan Tokens da Chiliz no metadata do NFT
+- **Integração Blockchain**: Deploy na Spicy Testnet (Chiliz Chain)
+- **API RESTful**: Endpoints completos para transações, NFTs e estatísticas
 
-- **Tracking Link Generation**: Converts normal URLs into trackable affiliate links
-- **Affiliate Webhooks**: Automatically processes postbacks from AWIN and Rakuten
-- **Cashback NFTs**: Automatically mints NFTs when cashback is confirmed
-- **Fan Tokens Integration**: Support for Chiliz Fan Tokens in NFT metadata
-- **Blockchain Integration**: Deployed on Spicy Testnet (Chiliz Chain)
-- **RESTful API**: Complete endpoints for transaction management, NFTs and statistics
-
-## 🏗️ Architecture
+## 🏗️ Arquitetura
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Frontend      │    │   Back2Fan API  │    │   Blockchain    │
 │                 │    │                 │    │   (Spicy)       │
-│ • Web App       │◄──►│ • Link Tracking │◄──►│ • NFT Contract  │
+│ • Web App       │◄──►│ • Link Tracking │◄──►│ • Contrato NFT  │
 │                 │    │ • Webhooks      │    │ • Fan Tokens    │
-│                 │    │ • NFT Minting   │    │                 │
+│                 │    │ • Mint de NFT   │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
                               │
                               ▼
                        ┌─────────────────┐
                        │   Database      │
                        │   (Supabase)    │
-                       │ • Transactions  │
-                       │ • Partners      │
+                       │ • Transações    │
+                       │ • Parceiros     │
                        │ • Fan Tokens    │
                        └─────────────────┘
 ```
 
-## 📋 Prerequisites
+## 📋 Pré-requisitos
 
 - Node.js 18+
-- Supabase account
-- AWIN Publisher account
-- Rakuten Advertiser account
-- Thirdweb account
-- Wallet with CHZ for deployment (Spicy Testnet)
+- Conta no Supabase
+- Conta de Publisher na AWIN
+- Conta de Advertiser na Rakuten
+- Conta no Thirdweb
+- Carteira com CHZ para deploy (Spicy Testnet)
 
-## 🛠️ Installation
+## 🛠️ Instalação
 
-1. **Clone the repository**
+1. **Clonar o repositório**
 ```bash
 git clone <repository-url>
 cd back2fan-api
 ```
 
-2. **Install dependencies**
+2. **Instalar dependências**
 ```bash
 npm install
 ```
 
-3. **Configure environment variables**
+3. **Configurar variáveis de ambiente**
 ```bash
 cp .env.example .env
 ```
 
-Edit the `.env` file with your credentials:
+Edite o arquivo `.env` com suas credenciais:
 ```env
-# Supabase Configuration
-SUPABASE_URL=your_supabase_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
+# Supabase
+SUPABASE_URL=sua_url_supabase
+SUPABASE_ANON_KEY=sua_chave_supabase
 
-# AWIN Configuration
-AWIN_PUBLISHER_ID=your_awin_publisher_id
-AWIN_API_TOKEN=your_awin_api_token
+# AWIN
+AWIN_PUBLISHER_ID=seu_awin_publisher_id
+AWIN_API_TOKEN=seu_awin_api_token
 
-# Rakuten Configuration
-RAKUTEN_PUBLISHER_ID=your_rakuten_publisher_id
-RAKUTEN_API_KEY=your_rakuten_api_key
+# Rakuten
+RAKUTEN_PUBLISHER_ID=seu_rakuten_publisher_id
+RAKUTEN_API_KEY=seu_rakuten_api_key
 
-# Thirdweb Configuration
-THIRDWEB_CLIENT_ID=your_thirdweb_client_id
-THIRDWEB_SECRET_KEY=your_thirdweb_secret_key
-THIRDWEB_PRIVATE_KEY=your_wallet_private_key
-NFT_CONTRACT_ADDRESS=your_nft_contract_address
+# Thirdweb
+THIRDWEB_CLIENT_ID=seu_thirdweb_client_id
+THIRDWEB_SECRET_KEY=seu_thirdweb_secret_key
+THIRDWEB_PRIVATE_KEY=sua_private_key_da_wallet
+NFT_CONTRACT_ADDRESS=seu_endereco_do_contrato_nft
 
-# Server Configuration
+# Servidor
 PORT=5000
 ```
 
-4. **Start the server**
+4. **Iniciar o servidor**
 ```bash
 npm start
 ```
 
-The API will be available at `http://localhost:5000`
+A API ficará disponível em `http://localhost:5000`
 
-## 📚 API Documentation
+## 📚 Documentação da API
 
-### Base URL
+### URL Base
 ```
 https://api.back2.fan
 ```
 
 ### Rate Limiting
-- **Limit**: 200 requests per IP every 10 minutes
-- **Response headers**:
-  - `X-RateLimit-Limit`: Maximum limit
-  - `X-RateLimit-Remaining`: Remaining requests
-  - `X-RateLimit-Reset`: Reset timestamp
+- **Limite**: 200 requisições por IP a cada 10 minutos
+- **Headers de resposta**:
+  - `X-RateLimit-Limit`: Limite máximo
+  - `X-RateLimit-Remaining`: Restante
+  - `X-RateLimit-Reset`: Timestamp de reset
 
 ---
 
-## 🔗 Main Endpoints
+## 🔗 Endpoints Principais
 
 ### 1. Health Check
 **GET** `/api/health`
 
-Checks if the API is working.
+Verifica se a API está funcionando.
 
 ```bash
 curl -X GET "https://api.back2.fan/api/health"
 ```
 
-**Response:**
+**Resposta:**
 ```json
 {
   "status": "OK",
@@ -129,10 +128,10 @@ curl -X GET "https://api.back2.fan/api/health"
 
 ---
 
-### 2. Generate Tracking Link
+### 2. Gerar Link de Rastreamento
 **POST** `/api/track-link`
 
-Converts a normal URL into a trackable affiliate link.
+Converte uma URL normal em um link de afiliado rastreável.
 
 **Body:**
 ```json
@@ -144,13 +143,13 @@ Converts a normal URL into a trackable affiliate link.
 }
 ```
 
-**Parameters:**
-- `url` (string): Original product URL
-- `userId` (string): Unique user ID
-- `network` (string): Affiliate network (`awin` or `rakuten`)
-- `tokenId` (string, optional): Fan Token ID
+**Parâmetros:**
+- `url` (string): URL original do produto
+- `userId` (string): ID único do usuário
+- `network` (string): Rede de afiliados (`awin` ou `rakuten`)
+- `tokenId` (string, opcional): ID do Fan Token
 
-**Response:**
+**Resposta:**
 ```json
 {
   "success": true,
@@ -166,11 +165,9 @@ Converts a normal URL into a trackable affiliate link.
 }
 ```
 
-**Example:**
+**Exemplo:**
 ```bash
-curl -X POST "https://api.back2.fan/api/track-link" \
-  -H "Content-Type: application/json" \
-  -d '{
+curl -X POST "https://api.back2.fan/api/track-link"   -H "Content-Type: application/json"   -d '{
     "url": "https://www.amazon.com/Echo-Dot-5th-generation-Alexa/dp/B09B8V1LZ3",
     "userId": "550e8400-e29b-41d4-a716-446655440000",
     "network": "awin"
@@ -179,12 +176,12 @@ curl -X POST "https://api.back2.fan/api/track-link" \
 
 ---
 
-### 3. Affiliate Webhooks
+### 3. Webhooks de Afiliados
 
-#### AWIN Webhook
+#### Webhook AWIN
 **POST** `/api/webhook/awin`
 
-Processes AWIN postbacks when a purchase is made.
+Processa postbacks da AWIN quando uma compra é realizada.
 
 **Body:**
 ```json
@@ -200,10 +197,10 @@ Processes AWIN postbacks when a purchase is made.
 }
 ```
 
-#### Rakuten Webhook
+#### Webhook Rakuten
 **POST** `/api/webhook/rakuten`
 
-Processes Rakuten postbacks.
+Processa postbacks da Rakuten.
 
 **Body:**
 ```json
@@ -221,18 +218,18 @@ Processes Rakuten postbacks.
 
 ---
 
-### 4. Get User Transactions
+### 4. Transações do Usuário
 **GET** `/api/transactions/:userId`
 
-Returns all transactions for a user.
+Retorna todas as transações de um usuário.
 
-**Query Parameters:**
-- `status` (string, optional): Filter by status (`pending`, `confirmed`, `rejected`)
-- `network` (string, optional): Filter by network (`awin`, `rakuten`)
-- `limit` (number, optional): Maximum number of results (default: 50)
-- `offset` (number, optional): Skip results (default: 0)
+**Query Params:**
+- `status` (string, opcional): Filtrar por status (`pending`, `confirmed`, `rejected`)
+- `network` (string, opcional): Filtrar por rede (`awin`, `rakuten`)
+- `limit` (number, opcional): Máximo de resultados (default: 50)
+- `offset` (number, opcional): Pular resultados (default: 0)
 
-**Response:**
+**Resposta:**
 ```json
 {
   "transactions": [
@@ -257,26 +254,26 @@ Returns all transactions for a user.
 }
 ```
 
-**Example:**
+**Exemplos:**
 ```bash
-# All transactions
+# Todas as transações
 curl -X GET "https://api.back2.fan/api/transactions/550e8400-e29b-41d4-a716-446655440000"
 
-# Only confirmed
+# Somente confirmadas
 curl -X GET "https://api.back2.fan/api/transactions/550e8400-e29b-41d4-a716-446655440000?status=confirmed"
 
-# With pagination
+# Com paginação
 curl -X GET "https://api.back2.fan/api/transactions/550e8400-e29b-41d4-a716-446655440000?limit=10&offset=0"
 ```
 
 ---
 
-### 5. User Statistics
+### 5. Estatísticas do Usuário
 **GET** `/api/stats/:userId`
 
-Returns consolidated user statistics.
+Retorna estatísticas consolidadas do usuário.
 
-**Response:**
+**Resposta:**
 ```json
 {
   "user_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -300,19 +297,19 @@ Returns consolidated user statistics.
 }
 ```
 
-**Example:**
+**Exemplo:**
 ```bash
 curl -X GET "https://api.back2.fan/api/stats/550e8400-e29b-41d4-a716-446655440000"
 ```
 
 ---
 
-### 6. User NFTs
+### 6. NFTs do Usuário
 **GET** `/api/nfts/:userId`
 
-Returns all NFTs for a user (combining blockchain + database).
+Retorna todos os NFTs de um usuário (combinando blockchain + banco).
 
-**Response:**
+**Resposta:**
 ```json
 {
   "user_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -332,14 +329,8 @@ Returns all NFTs for a user (combining blockchain + database).
         "description": "Cashback reward of $15.50",
         "image": "ipfs://QmImageHash/1",
         "attributes": [
-          {
-            "trait_type": "Partner",
-            "value": "Amazon"
-          },
-          {
-            "trait_type": "Cashback Amount",
-            "value": "15.50 USD"
-          }
+          { "trait_type": "Partner", "value": "Amazon" },
+          { "trait_type": "Cashback Amount", "value": "15.50 USD" }
         ]
       },
       "blockchain": {
@@ -360,19 +351,19 @@ Returns all NFTs for a user (combining blockchain + database).
 }
 ```
 
-**Example:**
+**Exemplo:**
 ```bash
 curl -X GET "https://api.back2.fan/api/nfts/550e8400-e29b-41d4-a716-446655440000"
 ```
 
 ---
 
-### 7. Specific NFT Details
+### 7. Detalhes de um NFT
 **GET** `/api/nft/:tokenId`
 
-Returns complete details of a specific NFT.
+Retorna os detalhes completos de um NFT específico.
 
-**Response:**
+**Resposta:**
 ```json
 {
   "tokenId": "1",
@@ -382,7 +373,7 @@ Returns complete details of a specific NFT.
     "name": "Cashback NFT - Amazon",
     "description": "Cashback reward of $15.50 from Amazon",
     "image": "ipfs://QmImageHash/1",
-    "attributes": [...]
+    "attributes": []
   },
   "blockchain": {
     "network": "Spicy Testnet (Chiliz)",
@@ -402,65 +393,55 @@ Returns complete details of a specific NFT.
 }
 ```
 
-**Example:**
+**Exemplo:**
 ```bash
 curl -X GET "https://api.back2.fan/api/nft/1"
 ```
 
 ---
 
-## 🔧 Administrative Endpoints
+## 🔧 Endpoints Administrativos
 
-### 8. Confirm Cashback
+### 8. Confirmar Cashback
 **POST** `/api/admin/confirm-cashback/:transactionId`
 
-Manually confirms or rejects a cashback transaction.
+Confirma ou rejeita manualmente uma transação.
 
 **Body:**
 ```json
 {
   "status": "confirmed",
-  "notes": "Cashback approved after manual verification"
+  "notes": "Cashback aprovado após verificação manual"
 }
 ```
 
-**Example:**
+**Exemplo:**
 ```bash
-curl -X POST "https://api.back2.fan/api/admin/confirm-cashback/123e4567-e89b-12d3-a456-426614174000" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "status": "confirmed",
-    "notes": "Cashback approved"
-  }'
+curl -X POST "https://api.back2.fan/api/admin/confirm-cashback/123e4567-e89b-12d3-a456-426614174000"   -H "Content-Type: application/json"   -d '{ "status": "confirmed", "notes": "Cashback aprovado" }'
 ```
 
-### 9. Update NFT Status
+### 9. Atualizar Status do NFT
 **POST** `/api/admin/nft/:tokenId/status`
 
-Updates the status of a specific NFT.
+Atualiza o status de um NFT específico.
 
 **Body:**
 ```json
 {
   "status": "confirmed",
-  "notes": "NFT confirmed and ready for claim"
+  "notes": "NFT confirmado e pronto para claim"
 }
 ```
 
-**Example:**
+**Exemplo:**
 ```bash
-curl -X POST "https://api.back2.fan/api/admin/nft/1/status" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "status": "confirmed",
-    "notes": "NFT confirmed"
-  }'
+curl -X POST "https://api.back2.fan/api/admin/nft/1/status"   -H "Content-Type: application/json"   -d '{ "status": "confirmed", "notes": "NFT confirmado" }'
 ```
 
-### 10. Configure Claim Conditions
+### 10. Configurar Condições de Claim
 **POST** `/api/admin/configure-claim-conditions`
 
-Configures claim conditions for NFTs.
+Configura condições de claim para NFTs.
 
 **Body:**
 ```json
@@ -473,14 +454,14 @@ Configures claim conditions for NFTs.
 
 ---
 
-## 🛠️ Blockchain Endpoints
+## 🛠️ Endpoints de Blockchain
 
-### 11. Check Account Roles
+### 11. Minhas Roles na Conta
 **GET** `/api/contract/my-roles`
 
-Checks which roles the current account has in the contract.
+Verifica quais roles a conta atual possui no contrato.
 
-**Response:**
+**Resposta:**
 ```json
 {
   "success": true,
@@ -492,23 +473,23 @@ Checks which roles the current account has in the contract.
 }
 ```
 
-### 12. Check Specific Role
+### 12. Verificar Role Específica
 **GET** `/api/contract/has-role/:roleHash/:address`
 
-Checks if an address has a specific role.
+Verifica se um endereço possui uma role específica.
 
-**Example:**
+**Exemplo:**
 ```bash
-# Check MINTER_ROLE
+# Verificar MINTER_ROLE
 curl -X GET "https://api.back2.fan/api/contract/has-role/0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6/0x1234567890abcdef"
 ```
 
-### 13. Wallet NFTs
+### 13. NFTs de uma Wallet
 **GET** `/api/contract/wallet/:walletAddress/nfts`
 
-Fetches NFTs directly from blockchain contract for a specific wallet.
+Busca NFTs diretamente no contrato para uma wallet.
 
-**Response:**
+**Resposta:**
 ```json
 {
   "wallet": "0x1234567890abcdef",
@@ -518,7 +499,7 @@ Fetches NFTs directly from blockchain contract for a specific wallet.
     "confirmed": 2,
     "pending": 1
   },
-  "nfts": [...]
+  "nfts": []
 }
 ```
 
@@ -526,21 +507,21 @@ Fetches NFTs directly from blockchain contract for a specific wallet.
 
 ## 📊 Status Codes
 
-| Code | Description |
-|------|-------------|
-| 200 | Success |
-| 201 | Created successfully |
-| 400 | Bad request |
-| 401 | Unauthorized |
-| 404 | Not found |
-| 429 | Too many requests (rate limit) |
-| 500 | Internal server error |
+| Código | Descrição |
+|-------:|-----------|
+| 200 | Sucesso |
+| 201 | Criado com sucesso |
+| 400 | Requisição inválida |
+| 401 | Não autorizado |
+| 404 | Não encontrado |
+| 429 | Muitas requisições (rate limit) |
+| 500 | Erro interno do servidor |
 
 ---
 
-## 🔄 Complete Flow
+## 🔄 Fluxos Completos
 
-### 1. Link Generation
+### 1. Geração de Link
 ```mermaid
 sequenceDiagram
     participant U as User
@@ -548,13 +529,13 @@ sequenceDiagram
     participant D as Database
     
     U->>A: POST /api/track-link
-    A->>D: Find partner by domain
-    D-->>A: Partner data
-    A->>A: Generate unique clickRef
+    A->>D: Encontrar parceiro por domínio
+    D-->>A: Dados do parceiro
+    A->>A: Gerar clickRef único
     A-->>U: Tracking link
 ```
 
-### 2. Purchase Processing
+### 2. Processamento de Compra
 ```mermaid
 sequenceDiagram
     participant AF as Affiliate Network
@@ -563,102 +544,94 @@ sequenceDiagram
     participant B as Blockchain
     
     AF->>A: POST /api/webhook/awin
-    A->>D: Save transaction
-    A->>B: Mint NFT
-    B-->>A: Transaction hash
-    A->>D: Update with token ID
-    A-->>AF: Confirmation
+    A->>D: Salvar transação
+    A->>B: Mint do NFT
+    B-->>A: Hash da transação
+    A->>D: Atualizar com token ID
+    A-->>AF: Confirmação
 ```
 
 ---
 
-## 🚨 Error Handling
+## 🚨 Tratamento de Erros
 
-All endpoints return errors in JSON format:
+Todos os endpoints retornam erros em JSON:
 
 ```json
 {
-  "error": "Error description",
+  "error": "Descrição do erro",
   "code": "ERROR_CODE",
-  "details": "Additional information"
+  "details": "Informações adicionais"
 }
 ```
 
-### Common Error Codes:
-- `INVALID_URL`: Provided URL is invalid
-- `PARTNER_NOT_FOUND`: Partner not found for domain
-- `USER_NOT_FOUND`: User not found
-- `TRANSACTION_NOT_FOUND`: Transaction not found
-- `RATE_LIMIT_EXCEEDED`: Request limit exceeded
-- `BLOCKCHAIN_ERROR`: Blockchain interaction error
+### Códigos de Erro Comuns:
+- `INVALID_URL`: URL fornecida inválida
+- `PARTNER_NOT_FOUND`: Parceiro não encontrado para o domínio
+- `USER_NOT_FOUND`: Usuário não encontrado
+- `TRANSACTION_NOT_FOUND`: Transação não encontrada
+- `RATE_LIMIT_EXCEEDED`: Limite de requisições excedido
+- `BLOCKCHAIN_ERROR`: Erro na interação com a blockchain
 
 ---
+# 📘 DOCUMENTAÇÃO PARA INTEGRAÇÃO COM O SEU PRÓPRIO SITE
 
-## 🔧 Advanced Configuration
+Abaixo está um guia **em português** para integrar o **seu e‑commerce** à Back2Fan.  
+Você poderá usar a **API** — basta enviar um POST para o nosso endpoint com os campos mínimos exigidos, após a integração.
 
-### Fan Tokens
-The API supports integration with Chiliz Fan Tokens. To include a Fan Token in NFT metadata:
+## 🔌 Integração direta com seu site prório (visão geral)
 
-```bash
-curl -X POST "https://api.back2.fan/api/track-link" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "url": "https://www.example.com/product",
-    "userId": "user123",
-    "network": "awin",
-    "tokenId": "fan-token-uuid"
-  }'
+1. **Entre em contato** como um parceiro no nosso sistema seu endpoint será liberado.
+2. **Gere o link rastreável** chamando `POST /api/track-link`.  
+   - O campo `trackingUrl` da resposta contém o parâmetro `clickref=user_<userId>_<timestamp>`.
+   - **Guarde o `clickref`** (você pode extrair do `trackingUrl`) na sessão do usuário, cookie ou no pedido.
+3. **No pagamento aprovado**, seu backend envia **um POST** para nosso endpoint: `POST /api/webhook/awin` com JSON contendo **pelo menos**:
+   - `advertiserId` (string) – Identificador da sua loja (Fornecido por nós).
+   - `clickRef` (string) – O mesmo valor `user_<userId>_<timestamp>` do passo 2.
+   - `saleAmount` (number) – Valor total da venda.
+   - `commissionAmount` (number) – Comissão equivalente de afiliado.
+   - `currency` (string ISO) – Ex.: `"USD"`, `"BRL"`.
+   - `transactionId` (string) – ID único da transação no seu sistema.
+   - `orderRef` (string) – Número/Referência do pedido.
+   - `status` (string) – `"pending"`, `"confirmed"` ou `"rejected"`.
+4. **Pronto**: nós registramos a transação, calculamos o cashback e, quando `status="confirmed"`, **confirmamos no NFT** de cashback.
+
+
+## 📮 Endpoint
+
+**URL:** `https://api.back2.fan/api/webhook/awin`  
+**Método:** `POST`  
+**Content‑Type:** `application/json`
+
+### 🧾 Corpo mínimo (JSON)
+```json
+{
+  "advertiserId": "CUSTOM",
+  "clickRef": "user_550e8400-e29b-41d4-a716-446655440000_1712688000000",
+  "commissionAmount": 25.50,
+  "saleAmount": 510.00,
+  "currency": "USD",
+  "transactionId": "STORE_TXN_123456789",
+  "orderRef": "ORDER_ABC_123456",
+  "status": "confirmed"
+}
 ```
 
-### Custom Webhooks
-Configure custom webhook URLs in affiliate networks:
-
-**AWIN:**
-- URL: `https://api.back2.fan/api/webhook/awin`
-- Method: POST
-- Format: JSON
-
-**Rakuten:**
-- URL: `https://api.back2.fan/api/webhook/rakuten`
-- Method: POST
-- Format: JSON
-
 ---
 
-## 📈 Monitoring
-
-### Logs
-The API generates detailed logs for:
-- Webhook processing
-- NFT minting
-- Blockchain errors
-- Rate limiting
-
-### Available Metrics
-- Total links generated
-- Conversion rate
-- Cashback volume
-- NFTs minted
-- Errors per endpoint
-
----
-
-## 🛡️ Security
+## 🛡️ Segurança
 
 ### Rate Limiting
-- 200 requests per IP every 10 minutes
-- Rate limit headers included in responses
+- 200 requisições por IP a cada 10 minutos (headers incluídos)
 
-### Validation
-- Strict input data validation
-- URL sanitization
-- Webhook signature verification
+### Validação
+- Validação de inputs estrita
+- Sanitização de URLs
+- Verificação de assinatura de webhook (quando disponível)
 
-### Blockchain Security
-- Role-based access control in NFT contract
-- Ownership verification before operations
-- Secure private key transaction signing
+### Segurança na Blockchain
+- Controle de acesso por roles no contrato NFT
+- Verificação de ownership antes de operações
+- Assinatura segura de transações com chave privada
 
 ---
-
-
