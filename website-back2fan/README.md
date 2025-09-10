@@ -1,323 +1,275 @@
-
 # Back2Fan Platform
 
-An innovative cashback platform that combines purchases at partner stores with Fan Tokens and staking to maximize rewards. Users can earn cashback on their purchases and increase their rewards by staking Fan Tokens.
+Uma plataforma inovadora de **cashback** que combina compras em lojas parceiras com **Fan Tokens** e **staking** para maximizar recompensas.  
+Os usuários podem ganhar cashback em suas compras e aumentar suas recompensas ao fazer staking de Fan Tokens.
 
-## 🌟 Key Features
+## 🌟 Principais Funcionalidades
 
-### 💰 Cashback System
-- Cashback on purchases at partner stores
-- Variable cashback rates per category and store
-- Bonus system based on staking levels (soon)
-- Multi-currency support (USD, EUR, BRL, GBP, etc.)
+### 💰 Sistema de Cashback
+- Cashback em compras realizadas em lojas parceiras  
+- Taxas de cashback variáveis por categoria e loja  
+- Sistema de bônus baseado em níveis de staking (em breve)  
+- Suporte a múltiplas moedas (USD, EUR, BRL, GBP, etc.)
 
-### 🏆 Staking System with Tiers (soon)
-- **Bronze** (100+ tokens): +1% cashback bonus
-- **Silver** (500+ tokens): +2% cashback bonus  
-- **Gold** (1000+ tokens): +3% cashback bonus
+### 🏆 Sistema de Staking com Níveis (em breve)
+- **Bronze** (100+ tokens): +1% de bônus em cashback  
+- **Prata** (500+ tokens): +2% de bônus em cashback  
+- **Ouro** (1000+ tokens): +3% de bônus em cashback  
 
 ### 🎫 Fan Tokens
-- Integration with football and sports team tokens
-- Real-time prices via CoinGecko API
-- Staking support for cashback bonuses (soon)
-- Token portfolio visualization
+- Integração com tokens de futebol e times esportivos  
+- Preços em tempo real via API do CoinGecko  
+- Suporte a staking para bônus de cashback (em breve)  
+- Visualização de portfólio de tokens  
 
-### 🛍️ Partner Stores
-- Catalog of partner stores
-- Filters by country, category, and cashback rate
-- Secure redirection for purchases
-- Click and conversion tracking
+### 🛍️ Lojas Parceiras
+- Catálogo de lojas parceiras  
+- Filtros por país, categoria e taxa de cashback  
+- Redirecionamento seguro para compras  
+- Rastreamento de cliques e conversões  
 
-### 🌍 Multilingual Support
-- Portuguese, English, Spanish, French, German, Italian
-- Country-based localization (BR, US, ES, etc.)
-- Automatic local currencies
+### 🌍 Suporte Multilíngue
+- Português, Inglês, Espanhol, Francês, Alemão, Italiano  
+- Localização baseada em país (BR, US, ES, etc.)  
+- Moedas locais automáticas  
 
-## 🚀 Technologies Used
+## 🚀 Tecnologias Utilizadas
 
 ### Frontend
-- **React 18** with TypeScript
-- **Vite** for development and build
-- **Tailwind CSS** for styling
-- **shadcn/ui** for components
-- **React Router** for navigation
-- **React Query** for state management
-- **i18next** for internationalization
+- **React 18** com TypeScript  
+- **Vite** para desenvolvimento e build  
+- **Tailwind CSS** para estilização  
+- **shadcn/ui** para componentes  
+- **React Router** para navegação  
+- **React Query** para gerenciamento de estado  
+- **i18next** para internacionalização  
 
 ### Blockchain & Web3
-- **Wagmi** for blockchain interaction
-- **Reown AppKit** for wallet connection
-- **Chiliz Chain** as main blockchain
-- **Viem** for Ethereum utilities
+- **Wagmi** para interação com blockchain  
+- **Reown AppKit** para conexão de carteiras  
+- **Chiliz Chain** como blockchain principal  
+- **Viem** para utilidades do Ethereum  
 
-### Backend & Database
-- **Supabase** for backend and database
-- **PostgreSQL** with Row Level Security
-- **Edge Functions** for serverless logic
-- **Real-time subscriptions** for live updates
+### Backend & Banco de Dados
+- **Supabase** como backend e banco de dados  
+- **PostgreSQL** com Row Level Security  
+- **Edge Functions** para lógica serverless  
+- **Assinaturas em tempo real** para atualizações instantâneas  
 
-### External APIs
-- **CoinGecko API** for token prices
-- **Affiliate Networks** (Awin, Rakuten) for tracking
+### APIs Externas
+- **CoinGecko API** para preços de tokens  
+- **Redes de Afiliados** (Awin, Rakuten) para rastreamento  
 
-## 🗄️ Database Architecture
+## 🗄️ Arquitetura do Banco de Dados
 
-The platform uses PostgreSQL through Supabase with the following table structure:
+A plataforma usa PostgreSQL via Supabase com a seguinte estrutura de tabelas:
 
-![Database Schema](database-schema.png)
+![Esquema do Banco de Dados](database-schema.png)
 
-### Core Tables
+### Tabelas Principais
 
 #### `wallet_users`
-Stores user information and wallet connections:
-- `id` (uuid): Unique user identifier
-- `wallet_address` (text): User's blockchain wallet address
-- `email` (text): User's email address
-- `name` (text): Full name
-- `first_name` (text): First name
-- `last_name` (text): Last name
-- `staked_tokens` (integer): Number of tokens currently staked
-- `staking_level` (text): Current staking tier (bronze/silver/gold)
-- `cashback_bonus` (integer): Bonus percentage from staking
-- `default_currency` (text): User's preferred currency
-- `created_at` (timestamp): Account creation date
+Armazena informações do usuário e conexões de carteira:
+- `id` (uuid): Identificador único do usuário  
+- `wallet_address` (text): Endereço da carteira blockchain do usuário  
+- `email` (text): E-mail do usuário  
+- `name` (text): Nome completo  
+- `first_name` (text): Primeiro nome  
+- `last_name` (text): Sobrenome  
+- `staked_tokens` (integer): Quantidade de tokens em staking  
+- `staking_level` (text): Nível de staking (bronze/prata/ouro)  
+- `cashback_bonus` (integer): Percentual de bônus vindo do staking  
+- `default_currency` (text): Moeda preferida do usuário  
+- `created_at` (timestamp): Data de criação da conta  
 
 #### `partners`
-Partner stores and their configurations:
-- `id` (uuid): Unique partner identifier
-- `name` (text): Store name
-- `logo` (text): Store logo URL or emoji
-- `url` (text): Store website URL
-- `base_rate` (integer): Base cashback percentage
-- `category` (text): Store category (Fashion, Electronics, etc.)
-- `featured` (boolean): Whether store is featured on homepage
-- `color` (text): UI color theme for the store
-- `country` (text[]): Array of supported countries
-- `cashback_by_category` (jsonb): Category-specific cashback rates
-- `awin_advertiser_id` (text): Awin network advertiser ID
-- `rakuten_advertiser_id` (varchar): Rakuten network advertiser ID
+Lojas parceiras e suas configurações:
+- `id` (uuid): Identificador único da loja  
+- `name` (text): Nome da loja  
+- `logo` (text): URL ou emoji do logo da loja  
+- `url` (text): URL do site da loja  
+- `base_rate` (integer): Percentual base de cashback  
+- `category` (text): Categoria da loja (Moda, Eletrônicos, etc.)  
+- `featured` (boolean): Se a loja aparece em destaque na home  
+- `color` (text): Cor usada na UI da loja  
+- `country` (text[]): Lista de países suportados  
+- `cashback_by_category` (jsonb): Taxas de cashback específicas por categoria  
+- `awin_advertiser_id` (text): ID da loja na rede Awin  
+- `rakuten_advertiser_id` (varchar): ID da loja na rede Rakuten  
 
 #### `purchases`
-User purchase history and cashback records:
-- `id` (uuid): Unique purchase identifier
-- `wallet_address` (text): Buyer's wallet address
-- `partner_id` (uuid): Reference to partner store
-- `purchase_value` (numeric): Total purchase amount
-- `cashback_percent` (integer): Applied cashback percentage
-- `cashback_amount` (numeric): Cashback amount earned
-- `currency` (text): Transaction currency
-- `date` (timestamp): Purchase date
-- `status` (text): Transaction status (pending/confirmed/cancelled)
+Histórico de compras e registros de cashback:
+- `id` (uuid): Identificador único da compra  
+- `wallet_address` (text): Endereço da carteira do comprador  
+- `partner_id` (uuid): Referência à loja parceira  
+- `purchase_value` (numeric): Valor total da compra  
+- `cashback_percent` (integer): Percentual aplicado  
+- `cashback_amount` (numeric): Valor de cashback recebido  
+- `currency` (text): Moeda da transação  
+- `date` (timestamp): Data da compra  
+- `status` (text): Status da transação (pendente/confirmada/cancelada)  
 
 #### `fan_tokens`
-Available Fan Tokens for staking:
-- `id` (uuid): Unique token identifier
-- `name` (text): Token full name
-- `symbol` (text): Token symbol (e.g., PSG, BAR)
-- `logo` (text): Token logo URL or emoji
-- `category` (text): Token category (Football, eSports, etc.)
-- `description` (text): Token description
-- `chiliz_contract` (text): Smart contract address on Chiliz Chain
-- `coingecko_id` (text): CoinGecko API identifier for price tracking
-- `created_at` (timestamp): Token creation date
+Tokens disponíveis para staking:
+- `id` (uuid): Identificador único do token  
+- `name` (text): Nome completo do token  
+- `symbol` (text): Símbolo (ex: PSG, BAR)  
+- `logo` (text): Logo do token  
+- `category` (text): Categoria (Futebol, eSports, etc.)  
+- `description` (text): Descrição do token  
+- `chiliz_contract` (text): Endereço do contrato na Chiliz Chain  
+- `coingecko_id` (text): Identificador no CoinGecko  
+- `created_at` (timestamp): Data de criação do token  
 
-### Tracking Tables
+### Tabelas de Rastreamento
 
 #### `store_clicks`
-Tracks user clicks on partner stores:
-- `id` (uuid): Unique click identifier
-- `wallet_address` (text): User's wallet address
-- `partner_id` (uuid): Clicked partner store
-- `clicked_at` (timestamp): Click timestamp
+Rastreia cliques dos usuários em lojas parceiras:  
+- `id` (uuid): Identificador único do clique  
+- `wallet_address` (text): Endereço da carteira do usuário  
+- `partner_id` (uuid): Loja clicada  
+- `clicked_at` (timestamp): Data/hora do clique  
 
 #### `affiliate_transactions`
-Comprehensive affiliate transaction tracking:
-- `id` (uuid): Unique transaction identifier
-- `user_id` (uuid): Reference to wallet_users
-- `wallet_address` (varchar): User's wallet address
-- `partner_id` (uuid): Reference to partner store
-- `transaction_id` (varchar): External transaction ID
-- `order_id` (varchar): Order identifier
-- `click_reference` (varchar): Click tracking reference
-- `sale_amount` (numeric): Total sale amount
-- `commission_amount` (numeric): Commission earned
-- `cashback_percent` (numeric): Cashback percentage applied
-- `cashback_amount` (numeric): Cashback amount
-- `currency` (varchar): Transaction currency
-- `affiliate_network` (varchar): Network used (awin/rakuten)
-- `advertiser_id` (varchar): Advertiser identifier
-- `status` (varchar): Transaction status
-- `transaction_date` (timestamp): Transaction date
-- `confirmation_date` (timestamp): Confirmation date
-- `fan_token_id` (text): Associated fan token
-- `nft_contract_address` (varchar): NFT contract address
-- `nft_token_id` (varchar): NFT token ID
-- `nft_metadata` (jsonb): NFT metadata
-- `nft_mint_status` (varchar): NFT minting status
-- `nft_transaction_hash` (varchar): Blockchain transaction hash
-- `raw_data` (jsonb): Raw affiliate data
-- `created_at` (timestamp): Record creation
-- `updated_at` (timestamp): Last update
+Rastreamento detalhado de transações de afiliados:  
+(inclui IDs, valores de venda, comissões, cashback aplicado, rede afiliada, status, NFTs associados e dados crus do webhook)
 
 #### `postback_logs`
-Logs from affiliate network webhooks:
-- `id` (uuid): Unique log identifier
-- `affiliate_network` (varchar): Network name
-- `raw_payload` (jsonb): Complete webhook payload
-- `processed` (boolean): Processing status
-- `error_message` (text): Error details if any
-- `transaction_id` (uuid): Associated transaction
-- `created_at` (timestamp): Log creation time
+Logs de webhooks das redes de afiliados:  
+(inclui payload bruto, status de processamento, erros e timestamps)  
 
-### Access Control
+### Controle de Acesso
 
 #### `user_roles`
-User role management system:
-- `id` (uuid): Unique role identifier
-- `wallet_address` (text): User's wallet address
-- `role` (user_role): Role type (admin/user)
-- `created_at` (timestamp): Role assignment date
-- `created_by` (text): Who assigned the role
+Sistema de gerenciamento de papéis:  
+- `id` (uuid): Identificador único do papel  
+- `wallet_address` (text): Carteira do usuário  
+- `role` (user_role): Papel (admin/usuário)  
+- `created_at` (timestamp): Data de atribuição  
+- `created_by` (text): Quem atribuiu  
 
-## 📁 Project Structure
+## 📁 Estrutura do Projeto
 
-```
 src/
-├── components/           # Reusable React components
-│   ├── ui/              # Base shadcn/ui components
-│   ├── admin/           # Administrative panel components
-│   └── ...              # Other specific components
-├── pages/               # Application pages
-├── hooks/               # Custom React hooks
-├── locales/             # Translation files
-├── integrations/        # External service integrations
-├── utils/               # Utility functions
-└── types/               # TypeScript type definitions
-```
+├── components/           # Componentes reutilizáveis
+│   ├── ui/              # Componentes base shadcn/ui
+│   ├── admin/           # Componentes do painel administrativo
+│   └── ...              
+├── pages/               # Páginas da aplicação
+├── hooks/               # Hooks customizados
+├── locales/             # Arquivos de tradução
+├── integrations/        # Integrações externas
+├── utils/               # Funções utilitárias
+└── types/               # Tipagens TypeScript
 
-## 🛠️ Development Setup
+## 🛠️ Configuração de Desenvolvimento
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Supabase account
-- Reown AppKit project ID
+### Pré-requisitos
+- Node.js 18+  
+- npm ou yarn  
+- Conta no Supabase  
+- ID de projeto no Reown AppKit  
 
-### Installation
+### Instalação
 
-1. **Clone the repository**
+1. **Clonar o repositório**
 ```bash
 git clone
 cd
 ```
 
-2. **Install dependencies**
+2. **Instalar dependências**
 ```bash
 npm install
 ```
 
-3. **Configure environment variables**
+3. **Configurar variáveis de ambiente**
 ```bash
 cp .env.example .env.local
 ```
 
-Edit `.env.local` with your configurations:
+Editar `.env.local`:
 ```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_REOWN_PROJECT_ID=your_reown_project_id
+VITE_SUPABASE_URL=sua_url_supabase
+VITE_SUPABASE_ANON_KEY=sua_chave_supabase
+VITE_REOWN_PROJECT_ID=seu_project_id
 ```
 
-4. **Run development server**
+4. **Rodar servidor de desenvolvimento**
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:8080`
+Aplicação disponível em `http://localhost:8080`
 
-### Database Setup
+### Configuração do Banco de Dados
+- Migrações no diretório `supabase/migrations/`  
+- Executar em ordem cronológica  
+- Recursos: **RLS, funções customizadas, triggers, assinaturas em tempo real**
 
-The Supabase migrations are located in `supabase/migrations/`. Run them in chronological order to set up the database schema.
+## 🌐 Deploy
 
-Key features of our database setup:
-- **Row Level Security (RLS)** for data protection
-- **Real-time subscriptions** for live updates
-- **Custom functions** for complex queries
-- **Triggers** for automatic data updates
+### Lovable (Recomendado)
+- Conectar repositório do GitHub  
+- Configurar variáveis no painel  
+- Deploy automático a cada push  
 
-## 🌐 Deployment
+### Vercel / Netlify
+- Conectar repositório  
+- Configurar variáveis  
+- Deploy automático (ou arrastar pasta `dist` no Netlify)  
 
-### Lovable (Recommended)
-1. Connect your GitHub repository to Lovable
-2. Configure environment variables in the panel
-3. Automatic deployment on every push
+## 🔧 Scripts Disponíveis
 
-### Vercel
-1. Connect repository to Vercel
-2. Configure environment variables
-3. Automatic deployment
+npm run dev          # Servidor de desenvolvimento
+npm run build        # Build de produção
+npm run preview      # Pré-visualização
+npm run lint         # Linter
 
-### Netlify
-1. Drag `dist` folder after `npm run build`
-2. Configure redirects for SPA
-3. Set environment variables
+## 🏗️ Arquitetura
 
-## 🔧 Available Scripts
+### Fluxo do Cashback
+1. Usuário conecta carteira Web3  
+2. Navega pelas lojas parceiras  
+3. Clica para visitar loja (rastreamento)  
+4. Faz compra na loja  
+5. Sistema recebe webhook de conversão  
+6. Cashback é calculado e registrado  
+7. Bônus de staking aplicado (se houver)  
 
-```bash
-npm run dev          # Development server
-npm run build        # Production build
-npm run preview      # Preview build
-npm run lint         # Code linting
-```
+### Sistema de Níveis (em breve)
+- Usuários fazem staking de tokens  
+- Níveis calculados automaticamente  
+- Bônus aplicado em compras futuras  
 
-## 🏗️ Architecture
+### Integração Web3
+- Suporte a múltiplas carteiras via Reown AppKit  
+- Conexão com Chiliz Chain  
+- Verificação de saldo de tokens  
+- Transações de staking seguras  
 
-### Cashback Flow
-1. User connects Web3 wallet
-2. Browses partner stores
-3. Clicks to visit store (tracked)
-4. Makes purchase at store
-5. System receives conversion webhook
-6. Cashback is calculated and recorded
-7. Staking bonus applied if applicable
+## 🔐 Segurança
 
-### Tier System (soon)
-- Users stake Fan Tokens
-- Tiers calculated automatically
-- Bonus applied to all future purchases
+- **Row Level Security** no Supabase  
+- **Verificação de assinaturas** em transações  
+- **Rate limiting** em APIs críticas  
+- **Validação de dados** no frontend e backend  
+- **Sanitização de entradas** de usuários  
 
-### Web3 Integration
-- Multi-wallet support via Reown AppKit
-- Chiliz Chain connection
-- Token balance verification
-- Secure staking transactions
+## 🧪 Testes
 
-## 🔐 Security
+npm run test          # Rodar testes
+npm run test:watch    # Testes em modo watch
+npm run test:coverage # Cobertura dos testes
 
-- **Row Level Security** in Supabase
-- **Signature verification** for transactions
-- **Rate limiting** on critical APIs
-- **Data validation** in frontend and backend
-- **Input sanitization** for user data
-
-## 🧪 Testing
-
-```bash
-npm run test         # Run tests
-npm run test:watch   # Watch mode tests
-npm run test:coverage # Test coverage
-```
-
-## 📊 Monitoring
+## 📊 Monitoramento
 
 ### Analytics
-- Vercel Analytics integration
-- Speed Insights for performance
-- Affiliate conversion tracking
+- Integração com Vercel Analytics  
+- Speed Insights para performance  
+- Rastreamento de conversões de afiliados  
 
 ### Logs
-- Structured logging in Supabase
-- Webhook logs for debugging
-- Error tracking
-
+- Logs estruturados no Supabase  
+- Logs de webhooks para debug  
+- Rastreamento de erros  
