@@ -1,18 +1,18 @@
-# Back2Fan – Main Repository
+# Back2Fan – Repositório Principal
 
-This repository contains the two main parts of the **Back2Fan** platform:
+Este repositório contém as duas partes principais da plataforma **Back2Fan**:
 
 - 🖥️ **Frontend (Website)**: `website-back2fan/`
 - ⚙️ **Backend/API**: `api-back2fan/`
 
-## 📚 Documentation
+## 📚 Documentação
 
-All documentation for setup, usage, and development is located in the respective README files:
+Toda a documentação para configuração, uso e desenvolvimento está localizada nos respectivos arquivos README:
 
-- 🔗 [Website Documentation](./website-back2fan/README.md)
-- 🔗 [API Documentation](./api-back2fan/README.md)
+- 🔗 [Documentação do Website](./website-back2fan/README.md)  
+- 🔗 [Documentação da API](./api-back2fan/README.md)
 
 ---
 
-To get started, pick one of the areas above and follow the instructions in the corresponding README.  
-If you have any questions, feel free to reach out to the development team.
+Para começar, escolha uma das áreas acima e siga as instruções no README correspondente.  
+Se tiver qualquer dúvida, entre em contato com a equipe de desenvolvimento.
